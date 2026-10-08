@@ -1,40 +1,34 @@
 import { cn } from "@/lib/cn";
 import { Reveal } from "@/components/ui/Reveal";
-import { Highlighted } from "@/components/ui/Highlighted";
 
-const discs = [
-  { label: "Liquidity providers", pos: "lg:col-start-2 lg:row-start-1" },
-  { label: "Payment gateways", pos: "lg:col-start-2 lg:row-start-2" },
-  { label: "KYC providers", pos: "lg:col-start-3 lg:row-start-2" },
-  { label: "Hosting", pos: "lg:col-start-2 lg:row-start-3" },
-  { label: "Data feeds", pos: "lg:col-start-3 lg:row-start-3" },
-  { label: "Legal partners", pos: "lg:col-start-4 lg:row-start-3" },
-];
+const partners = ["Liquidity providers", "Payment gateways", "KYC providers", "Hosting", "Data feeds", "Legal partners"];
 
-/** "Over N years" with a cluster of dark-glass discs, like the Design Agency reference. */
+/** "5 years" statement next to a grid of the provider types we work with. */
 export function PartnersCluster({ years, className }: { years: string; className?: string }) {
   return (
-    <section className={cn("relative overflow-hidden py-16 md:py-24", className)}>
-      <div className="container-x grid items-center gap-12 lg:grid-cols-2">
-        <Reveal>
-          <div className="relative border-r-0 pr-0 lg:border-r lg:border-line lg:pr-16">
-            <h2 className="font-display text-6xl font-semibold leading-[0.95] text-ink md:text-8xl">
-              <Highlighted text={`${years} years`} highlight={years} />
+    <section className={cn("overflow-hidden", className)}>
+      <div className="grid gap-px bg-line lg:grid-cols-2">
+        <div className="bg-paper px-6 py-12 md:px-10 md:py-16">
+          <Reveal>
+            <span className="tag">Experience</span>
+            <h2 className="mt-6 font-display text-[64px] leading-[0.95] font-medium tracking-[-0.04em] text-ink md:text-[96px]">
+              {years} <span className="highlight">years</span>
             </h2>
-            <p className="mt-6 max-w-sm text-lg text-muted">
+            <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-muted">
               of building, hosting and supporting brokerage technology alongside the industry&apos;s providers.
             </p>
+          </Reveal>
+        </div>
+        <Reveal>
+          <div className="grid h-full grid-cols-2 gap-px bg-line sm:grid-cols-3">
+            {partners.map((p, i) => (
+              <div key={p} className="flex min-h-[120px] flex-col justify-between bg-paper p-5 transition-colors hover:bg-card">
+                <span className="font-mono text-[10.5px] text-faint">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-display text-[15px] font-semibold text-ink">{p}</span>
+              </div>
+            ))}
           </div>
         </Reveal>
-        <div className="grid grid-cols-3 gap-3 sm:gap-4 lg:grid-cols-4 lg:grid-rows-3">
-          {discs.map((d, i) => (
-            <Reveal key={d.label} delay={i * 0.06} className={cn("aspect-square", d.pos)}>
-              <div className="flex size-full items-center justify-center rounded-full border border-line bg-gradient-to-br from-surface-2 to-bg-2 p-4 text-center font-display text-sm font-medium text-ink shadow-card transition-colors hover:border-orange-500/50 sm:text-base">
-                {d.label}
-              </div>
-            </Reveal>
-          ))}
-        </div>
       </div>
     </section>
   );

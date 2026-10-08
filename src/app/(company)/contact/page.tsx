@@ -32,7 +32,7 @@ export default function ContactPage() {
               return (
                 <Reveal key={ch.title} delay={i * 0.06}>
                   <GlassCard className="flex items-start gap-4">
-                    <span className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-line bg-surface-2 text-orange-400">
+                    <span className="flex size-9 shrink-0 items-center justify-center border border-line bg-raise text-soft">
                       <Icon className="size-5" />
                     </span>
                     <div>
@@ -46,7 +46,7 @@ export default function ContactPage() {
             <Reveal delay={0.2}>
               <GlassCard tone="dark" className="mt-2">
                 <div className="flex items-start gap-3">
-                  <MapPin className="mt-0.5 size-4 shrink-0 text-orange-400" />
+                  <MapPin className="mt-0.5 size-4 shrink-0 text-soft" />
                   <div>
                     <p className="text-sm font-medium text-ink">{c.headquarters}</p>
                     <p className="mt-1 text-sm leading-relaxed text-muted">{c.regions}</p>
@@ -54,7 +54,7 @@ export default function ContactPage() {
                 </div>
                 <div className="mt-5 flex items-center gap-2">
                   {site.socials.map((s) => (
-                    <a key={s.name} href={s.href} target="_blank" rel="noreferrer" aria-label={s.name} className="flex size-9 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-orange-500 hover:text-orange-400">
+                    <a key={s.name} href={s.href} target="_blank" rel="noreferrer" aria-label={s.name} className="flex size-9 items-center justify-center border border-line bg-raise text-muted transition-colors hover:border-line-strong hover:text-ink">
                       <SocialIcon name={s.icon} width={14} height={14} />
                     </a>
                   ))}
@@ -63,7 +63,7 @@ export default function ContactPage() {
             </Reveal>
           </div>
           <Reveal delay={0.1}>
-            <div className="rounded-panel border border-line glass p-6 md:p-8">
+            <div className="border border-line bg-band p-6 md:p-8">
               <ContactForm />
             </div>
           </Reveal>

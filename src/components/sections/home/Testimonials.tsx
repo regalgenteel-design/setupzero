@@ -6,35 +6,33 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function Testimonials() {
   return (
-    <section className="relative py-20 md:py-28">
-      <div className="container-x">
+    <section>
+      <div className="border-b border-line px-6 py-12 md:px-10 md:py-16">
         <Reveal>
-          <SectionHeading eyebrow={testimonials.eyebrow} heading={testimonials.heading} highlight={testimonials.highlight} align="center" />
+          <SectionHeading eyebrow={testimonials.eyebrow} heading={testimonials.heading} highlight={testimonials.highlight} />
         </Reveal>
-        <div className="mt-14 grid gap-4 md:grid-cols-3">
-          {testimonials.items.map((t, i) => (
-            <Reveal key={i} delay={i * 0.08}>
-              <GlassCard className="flex h-full flex-col justify-between gap-8">
+      </div>
+      <div className="grid gap-6 p-6 md:grid-cols-3 md:p-10">
+        {testimonials.items.map((t, i) => (
+          <Reveal key={i} delay={i * 0.08}>
+            <GlassCard hover className="flex h-full flex-col justify-between gap-10">
+              <div>
+                <Quote className="size-5 text-faint" />
+                <p className="mt-4 font-serif text-xl leading-snug text-ink">&ldquo;{t.quote}&rdquo;</p>
+              </div>
+              <div className="flex items-center gap-3 border-t border-line pt-4">
+                <span className="flex size-9 items-center justify-center border border-line bg-raise font-mono text-xs text-soft">{t.name.charAt(0)}</span>
                 <div>
-                  <Quote className="size-6 text-orange-400" />
-                  <p className="mt-5 text-base leading-relaxed text-ink">&ldquo;{t.quote}&rdquo;</p>
+                  <p className="text-sm font-semibold text-ink">{t.name}</p>
+                  <p className="text-xs text-muted">
+                    {t.role}, {t.company}
+                  </p>
                 </div>
-                <div className="flex items-center gap-3 border-t border-line pt-5">
-                  <span className="flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-orange-500/40 to-ember-deep/40 font-display text-sm font-semibold text-ink">
-                    {t.name.charAt(0)}
-                  </span>
-                  <div>
-                    <p className="text-sm font-medium text-ink">{t.name}</p>
-                    <p className="text-xs text-muted">
-                      {t.role}, {t.company}
-                    </p>
-                  </div>
-                  {t.placeholder ? <span className="ml-auto bracket-muted text-[9px]">pending</span> : null}
-                </div>
-              </GlassCard>
-            </Reveal>
-          ))}
-        </div>
+                {t.placeholder ? <span className="ml-auto bracket-muted text-[9.5px]">pending</span> : null}
+              </div>
+            </GlassCard>
+          </Reveal>
+        ))}
       </div>
     </section>
   );

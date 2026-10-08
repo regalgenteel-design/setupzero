@@ -34,13 +34,13 @@ export default function CareersPage() {
               <Reveal key={r.title} delay={i * 0.05}>
                 <li className="flex flex-col gap-2 py-5 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex items-center gap-4">
-                    <span className="font-mono text-xs text-orange-400">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="font-mono text-xs text-soft">{String(i + 1).padStart(2, "0")}</span>
                     <span className="font-display text-xl font-medium text-ink">{r.title}</span>
                   </div>
                   <div className="flex items-center gap-5 text-sm text-muted">
                     <span>{r.team}</span>
                     <span className="inline-flex items-center gap-1.5">
-                      <MapPin className="size-3.5 text-orange-400" /> {r.location}
+                      <MapPin className="size-3.5 text-soft" /> {r.location}
                     </span>
                   </div>
                 </li>

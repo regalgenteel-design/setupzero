@@ -5,26 +5,24 @@ type Channel = { label: string; icon: string; note?: string };
 
 export function SupportChannels({ heading, channels }: { heading: string; channels: Channel[] }) {
   return (
-    <section className="relative py-10 md:py-14">
-      <div className="container-x">
-        <Reveal>
-          <div className="flex flex-col gap-6 rounded-panel border border-line glass p-6 md:flex-row md:items-center md:justify-between md:p-8">
-            <span className="bracket">{heading}</span>
-            <ul className="flex flex-wrap gap-2">
-              {channels.map((c) => {
-                const Icon = getIcon(c.icon);
-                return (
-                  <li key={c.label} className="inline-flex items-center gap-2 rounded-full border border-line bg-white/[0.03] px-4 py-2 text-sm text-ink">
-                    <Icon className="size-4 text-orange-400" />
-                    {c.label}
-                    {c.note ? <span className="text-xs text-dim">({c.note})</span> : null}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </Reveal>
-      </div>
+    <section>
+      <Reveal>
+        <div className="flex flex-col gap-5 px-6 py-7 md:flex-row md:items-center md:justify-between md:px-10">
+          <span className="tag">{heading}</span>
+          <ul className="flex flex-wrap gap-1.5">
+            {channels.map((c) => {
+              const Icon = getIcon(c.icon);
+              return (
+                <li key={c.label} className="inline-flex items-center gap-2 border border-line bg-raise px-3 py-1.5 text-[13px] text-ink">
+                  <Icon className="size-3.5 text-soft" />
+                  {c.label}
+                  {c.note ? <span className="text-xs text-muted">({c.note})</span> : null}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </Reveal>
     </section>
   );
 }

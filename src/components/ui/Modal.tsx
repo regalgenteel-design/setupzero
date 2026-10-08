@@ -49,7 +49,7 @@ export function Modal({ open, onClose, title, description, children, className }
             type="button"
             aria-label="Close dialog"
             onClick={onClose}
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            className="absolute inset-0 bg-page/80 backdrop-blur-sm"
           />
           <motion.div
             ref={panelRef}
@@ -61,11 +61,10 @@ export function Modal({ open, onClose, title, description, children, className }
             exit={{ opacity: 0, y: 24, scale: 0.98 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className={cn(
-              "relative z-10 max-h-[92vh] w-full max-w-xl overflow-y-auto rounded-t-panel glass-dark p-6 sm:rounded-panel sm:p-8",
+              "relative z-10 max-h-[92vh] w-full max-w-xl overflow-y-auto border border-line bg-paper p-6 shadow-card sm:p-8",
               className,
             )}
           >
-            <div className="pointer-events-none absolute -top-24 right-0 h-48 w-72 ember-glow opacity-60" aria-hidden />
             <div className="relative flex items-start justify-between gap-6">
               <div>
                 <h2 id="modal-title" className="font-display text-2xl font-semibold text-ink">
@@ -77,7 +76,7 @@ export function Modal({ open, onClose, title, description, children, className }
                 type="button"
                 onClick={onClose}
                 aria-label="Close"
-                className="flex size-9 shrink-0 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-orange-500 hover:text-ink"
+                className="flex size-9 shrink-0 items-center justify-center border border-line bg-raise text-muted transition-colors hover:border-line-strong hover:text-ink"
               >
                 <X className="size-4" />
               </button>

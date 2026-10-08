@@ -22,21 +22,23 @@ export function ProductTemplate({ page }: { page: ProductPage }) {
         badges={page.hero.badges}
       />
       <BulletList eyebrow="Features" heading="What's included" highlight="included" sub={page.summary} bullets={page.bullets} />
-      <section className="relative py-16 md:py-24">
-        <div className="container-x">
+      <section>
+        <div>
+          <div className="border-b border-line px-6 py-12 md:px-10 md:py-16">
           <Reveal>
-            <SectionHeading eyebrow="Works with" heading="Part of one connected stack" highlight="connected stack" className="mb-10" />
+            <SectionHeading eyebrow="Works with" heading="Part of one connected stack" highlight="connected stack" />
           </Reveal>
+          </div>
           <Reveal>
-          <div className="grid gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
             {related.map((p) => {
               const Icon = getIcon(p.nav.icon);
               return (
-                <div key={p.slug} className="bg-bg">
-                  <Link href={`/products/${p.slug}`} className="group flex h-full flex-col justify-between gap-6 bg-bg p-6 transition-colors hover:bg-bg-2">
+                <div key={p.slug} className="bg-paper">
+                  <Link href={`/products/${p.slug}`} className="group flex h-full min-h-[170px] flex-col justify-between gap-6 bg-paper p-6 transition-colors hover:bg-card">
                     <div className="flex items-center justify-between">
-                      <Icon className="size-5 text-orange-400" />
-                      <ArrowUpRight className="size-4 text-dim transition-colors group-hover:text-orange-400" />
+                      <Icon className="size-5 text-soft" />
+                      <ArrowUpRight className="size-4 text-dim transition-colors group-hover:text-ink" />
                     </div>
                     <div>
                       <h3 className="font-display text-lg font-semibold text-ink">{p.nav.label}</h3>

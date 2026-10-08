@@ -8,20 +8,20 @@ import { Reveal } from "@/components/ui/Reveal";
 function Fee({ value }: { value: string }) {
   const numeric = /^[$€£\d]/.test(value);
   return (
-    <span className={numeric ? "font-pixel text-lg text-ink" : "font-display text-sm font-semibold text-ink"}>{value}</span>
+    <span className={numeric ? "font-display text-lg font-semibold text-ink" : "font-display text-sm font-semibold text-ink"}>{value}</span>
   );
 }
 
 function Cell({ value }: { value: string | boolean }) {
   if (value === true)
     return (
-      <span className="inline-flex size-6 items-center justify-center rounded-full bg-orange-500/15 text-orange-400">
+      <span className="inline-flex size-6 items-center justify-center border border-line bg-raise text-ink">
         <Check className="size-3.5" />
       </span>
     );
   if (value === false)
     return (
-      <span className="inline-flex size-6 items-center justify-center rounded-full bg-white/5 text-dim">
+      <span className="inline-flex size-6 items-center justify-center border border-line text-faint">
         <Minus className="size-3.5" />
       </span>
     );
@@ -33,7 +33,7 @@ export function PricingTable({ tiers, rows }: { tiers: PricingTier[]; rows: Pric
     <div>
       {/* Desktop table */}
       <Reveal>
-        <div className="hidden overflow-hidden rounded-panel border border-line glass lg:block">
+        <div className="hidden overflow-hidden border border-line bg-paper lg:block">
           <table className="w-full border-collapse text-left">
             <thead>
               <tr className="border-b border-line">
@@ -43,7 +43,7 @@ export function PricingTable({ tiers, rows }: { tiers: PricingTier[]; rows: Pric
                 {tiers.map((t) => (
                   <th
                     key={t.name}
-                    className={cn("p-6 align-top", t.highlighted && "bg-orange-500/[0.07]")}
+                    className={cn("p-6 align-top", t.highlighted && "bg-band")}
                   >
                     <div className="flex items-center gap-3">
                       <span className="font-display text-2xl font-semibold text-ink">{t.name}</span>
@@ -74,7 +74,7 @@ export function PricingTable({ tiers, rows }: { tiers: PricingTier[]; rows: Pric
                     {row.label}
                   </th>
                   {row.values.map((v, i) => (
-                    <td key={i} className={cn("p-5", tiers[i]?.highlighted && "bg-orange-500/[0.07]")}>
+                    <td key={i} className={cn("p-5", tiers[i]?.highlighted && "bg-band")}>
                       <Cell value={v} />
                     </td>
                   ))}
@@ -89,7 +89,7 @@ export function PricingTable({ tiers, rows }: { tiers: PricingTier[]; rows: Pric
       <div className="grid gap-4 lg:hidden">
         {tiers.map((t, ti) => (
           <Reveal key={t.name} delay={ti * 0.08}>
-            <div className={cn("rounded-panel border border-line glass p-6", t.highlighted && "border-orange-500/50")}>
+            <div className={cn("border border-line bg-paper p-6", t.highlighted && "border-ink/50")}>
               <div className="flex items-center gap-3">
                 <span className="font-display text-2xl font-semibold text-ink">{t.name}</span>
                 {t.highlighted ? <Badge variant="solid">Popular</Badge> : null}

@@ -14,24 +14,25 @@ type TimelineProps = {
 };
 
 export function Timeline({ eyebrow, heading, highlight, sub, steps, className }: TimelineProps) {
-  const cols =
-    steps.length >= 6 ? "sm:grid-cols-2 lg:grid-cols-3" : steps.length === 4 ? "sm:grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-2 lg:grid-cols-3";
+  const cols = steps.length === 4 ? "sm:grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-2 lg:grid-cols-3";
   return (
-    <section className={cn("relative py-16 md:py-24", className)}>
-      <div className="container-x">
-        {heading ? (
+    <section className={className}>
+      {heading ? (
+        <div className="border-b border-line px-6 py-12 md:px-10 md:py-16">
           <Reveal>
-            <SectionHeading eyebrow={eyebrow} heading={heading} highlight={highlight} sub={sub} className="mb-12" />
+            <SectionHeading eyebrow={eyebrow} heading={heading} highlight={highlight} sub={sub} />
           </Reveal>
-        ) : null}
-        <div className={cn("grid gap-x-8 gap-y-10", cols)}>
-          {steps.map((s, i) => (
-            <Reveal key={s.step} delay={Math.min(i * 0.08, 0.4)}>
+        </div>
+      ) : null}
+      <Reveal>
+        <div className={cn("grid gap-px bg-line", cols)}>
+          {steps.map((s) => (
+            <div key={s.step} className="bg-paper transition-colors hover:bg-card">
               <StepCard {...s} />
-            </Reveal>
+            </div>
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

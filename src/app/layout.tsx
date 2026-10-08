@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
-import { Inter, Manrope, Silkscreen, Space_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { JetBrains_Mono, Manrope, Newsreader } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
+import { themeInitScript } from "@/lib/hooks/useTheme";
 import { DemoProvider } from "@/components/forms/demo-context";
 import { DemoModal } from "@/components/forms/DemoModal";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Preloader } from "@/components/layout/Preloader";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
-const silkscreen = Silkscreen({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-silkscreen", display: "swap" });
-const spaceMono = Space_Mono({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-space-mono", display: "swap" });
+const newsreader = Newsreader({ subsets: ["latin"], variable: "--font-newsreader", display: "swap", style: ["normal", "italic"] });
+const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -24,6 +24,13 @@ export const metadata: Metadata = {
   openGraph: { siteName: site.name, type: "website", locale: "en_US" },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0b0b0b" },
+    { media: "(prefers-color-scheme: light)", color: "#efefef" },
+  ],
 };
 
 const organizationJsonLd = {
@@ -41,14 +48,23 @@ const organizationJsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${manrope.variable} ${silkscreen.variable} ${spaceMono.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      data-theme="dark"
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+      className={`${manrope.variable} ${newsreader.variable} ${jetbrains.variable} h-full antialiased`}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="flex min-h-full flex-col">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
         <DemoProvider>
           <Preloader />
           <Header />
-          <main className="relative z-[1] flex-1">{children}</main>
-          <div className="relative z-[1]">
+          <div className="flex flex-1 flex-col px-[clamp(10px,2.4vw,28px)] pt-[92px] pb-7">
+            <main className="page-stack flex-1">{children}</main>
             <Footer />
           </div>
           <DemoModal />

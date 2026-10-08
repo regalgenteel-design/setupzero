@@ -1,39 +1,46 @@
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 import { solutionsOverview } from "@/content/home";
 import { solutions } from "@/content/solutions";
 import { solutionImage } from "@/content/images";
+import { Frame } from "@/components/ui/Frame";
+import { ImageCard } from "@/components/ui/ImageCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { ImageCard } from "@/components/ui/ImageCard";
-import { ArrowLink } from "@/components/ui/ArrowLink";
 
 export function SolutionsOverview() {
   return (
-    <section className="relative py-20 md:py-28">
-      <div className="container-x">
-        <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-end">
-          <Reveal>
-            <SectionHeading eyebrow={solutionsOverview.eyebrow} heading={solutionsOverview.heading} highlight={solutionsOverview.highlight} />
+    <section>
+      <div className="grid gap-8 border-b border-line px-6 py-12 md:px-10 md:py-16 lg:grid-cols-2 lg:items-end">
+        <Reveal>
+          <SectionHeading eyebrow={solutionsOverview.eyebrow} heading={solutionsOverview.heading} highlight={solutionsOverview.highlight} />
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="max-w-md text-[15px] leading-relaxed text-muted lg:ml-auto">{solutionsOverview.intro}</p>
+        </Reveal>
+      </div>
+      <div className="grid gap-6 p-6 sm:grid-cols-2 md:p-10 lg:grid-cols-3">
+        {solutions.map((s, i) => (
+          <Reveal key={s.slug} delay={Math.min(i * 0.06, 0.36)}>
+            <ImageCard title={s.nav.label} body={s.summary} href={`/solutions/${s.slug}`} image={solutionImage(s.slug)} index={i} />
           </Reveal>
-          <Reveal delay={0.1}>
-            <p className="max-w-lg text-lg leading-relaxed text-muted lg:ml-auto">{solutionsOverview.intro}</p>
-          </Reveal>
-        </div>
-
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {solutions.map((s, i) => (
-            <Reveal key={s.slug} delay={Math.min(i * 0.07, 0.4)}>
-              <ImageCard title={s.nav.label} body={s.summary} href={`/solutions/${s.slug}`} image={solutionImage(s.slug)} index={i} />
-            </Reveal>
-          ))}
-          <Reveal delay={0.35} className="flex items-center justify-center rounded-card border border-dashed border-line p-8">
-            <div className="text-center">
-              <p className="max-w-[22ch] font-display text-xl font-medium text-ink">You don&apos;t need everything, just what works.</p>
-              <ArrowLink href="/solutions" className="mt-4">
-                View all solutions
-              </ArrowLink>
-            </div>
-          </Reveal>
-        </div>
+        ))}
+        <Reveal delay={0.36}>
+          <Frame className="h-full">
+            <Link href="/solutions" className="group flex h-full min-h-[220px] flex-col justify-between border border-dashed border-line-strong bg-band p-6 transition-colors hover:border-ink/50">
+              <span className="font-mono text-[11px] tracking-[0.06em] text-muted uppercase">All solutions</span>
+              <div>
+                <p className="font-display text-xl leading-snug font-medium text-ink">
+                  You don&apos;t need everything,
+                  <span className="highlight block">just what works.</span>
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-medium text-ink">
+                  View all solutions <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </div>
+            </Link>
+          </Frame>
+        </Reveal>
       </div>
     </section>
   );

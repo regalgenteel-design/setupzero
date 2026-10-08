@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { cn } from "@/lib/cn";
+import { Frame } from "./Frame";
 
 type GlassCardProps = ComponentPropsWithoutRef<"div"> & {
   hover?: boolean;
@@ -9,46 +10,27 @@ type GlassCardProps = ComponentPropsWithoutRef<"div"> & {
 };
 
 const tones = {
-  glass: "glass",
-  strong: "glass-strong",
-  dark: "glass-dark",
+  glass: "bg-card border border-line",
+  strong: "bg-raise border border-line-strong",
+  dark: "bg-paper border border-line",
 };
 
+/** Flat square card. With `hover`, it gets corner brackets that spring out. */
 export function GlassCard({ hover, tone = "glass", className, children, ...rest }: GlassCardProps) {
-  return (
-    <div
-      className={cn(
-        "relative rounded-card p-6",
-        tones[tone],
-        hover &&
-          "transition-all duration-500 ease-out-expo hover:-translate-y-1 hover:border-orange-500/40 hover:shadow-card",
-        className,
-      )}
-      {...rest}
-    >
+  const card = (
+    <div className={cn("relative h-full p-6 transition-colors duration-300", tones[tone], hover && "hover:border-line-strong", className)} {...rest}>
       {children}
     </div>
   );
+  return hover ? <Frame className="h-full">{card}</Frame> : card;
 }
 
-export function GlassLinkCard({
-  href,
-  className,
-  children,
-}: {
-  href: string;
-  className?: string;
-  children: ReactNode;
-}) {
+export function GlassLinkCard({ href, className, children }: { href: string; className?: string; children: ReactNode }) {
   return (
-    <Link
-      href={href}
-      className={cn(
-        "group relative block rounded-card glass p-6 transition-all duration-500 ease-out-expo hover:-translate-y-1 hover:border-orange-500/40 hover:shadow-card",
-        className,
-      )}
-    >
-      {children}
-    </Link>
+    <Frame className="h-full">
+      <Link href={href} className={cn("group relative block h-full border border-line bg-card p-6 transition-colors duration-300 hover:border-line-strong", className)}>
+        {children}
+      </Link>
+    </Frame>
   );
 }

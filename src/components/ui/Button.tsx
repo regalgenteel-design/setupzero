@@ -6,20 +6,19 @@ import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { useDemo } from "@/components/forms/demo-context";
 import type { ButtonVariant, Cta } from "@/content/schema";
+import { Frame } from "./Frame";
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary:
-    "bg-orange-500 text-black shadow-glow-sm hover:bg-orange-400 hover:shadow-glow active:scale-[0.98]",
-  outline:
-    "border border-line-strong bg-white/[0.02] text-ink hover:border-orange-500/70 hover:bg-white/[0.06] active:scale-[0.98]",
-  ghost: "text-ink hover:text-orange-400",
-  cream: "bg-cream text-black hover:bg-white active:scale-[0.98]",
+  primary: "bg-ink text-paper hover:bg-soft",
+  outline: "border border-line-strong bg-raise text-ink hover:border-ink/60",
+  ghost: "text-muted hover:text-ink",
+  cream: "bg-ink text-paper hover:bg-soft",
 };
 
 const sizeClasses = {
-  sm: "h-9 px-4 text-[13px]",
-  md: "h-11 px-5 text-sm",
-  lg: "h-[52px] px-7 text-[15px]",
+  sm: "h-9 px-3.5 text-[13px]",
+  md: "h-10 px-4 text-[13.5px]",
+  lg: "h-11 px-5 text-sm",
 };
 
 type BaseProps = {
@@ -40,7 +39,7 @@ type ButtonProps = BaseProps &
 export function Button({ variant = "primary", size = "md", icon, className, children, ...rest }: ButtonProps) {
   const demo = useDemo();
   const classes = cn(
-    "inline-flex items-center justify-center gap-2 rounded-full font-medium whitespace-nowrap transition-all duration-300 ease-out-expo",
+    "group/btn inline-flex items-center justify-center gap-2 rounded-[2px] font-medium whitespace-nowrap transition-colors duration-300 active:translate-y-px disabled:opacity-60",
     variantClasses[variant],
     sizeClasses[size],
     className,
@@ -48,30 +47,43 @@ export function Button({ variant = "primary", size = "md", icon, className, chil
   const content = (
     <>
       <span>{children}</span>
-      {icon ? <ArrowUpRight className="size-4 shrink-0" aria-hidden /> : null}
+      {icon ? (
+        <ArrowUpRight className="size-3.5 shrink-0 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" aria-hidden />
+      ) : null}
     </>
   );
 
+  let el: ReactNode;
   if ("action" in rest && rest.action === "demo") {
-    return (
+    el = (
       <button type="button" className={classes} onClick={() => demo.open(String(children))}>
         {content}
       </button>
     );
-  }
-  if ("href" in rest && typeof rest.href === "string") {
-    return (
+  } else if ("href" in rest && typeof rest.href === "string") {
+    el = (
       <Link href={rest.href} className={classes}>
         {content}
       </Link>
     );
+  } else {
+    const { type = "button", ...buttonProps } = rest as ComponentPropsWithoutRef<"button">;
+    el = (
+      <button type={type} className={classes} {...buttonProps}>
+        {content}
+      </button>
+    );
   }
-  const { type = "button", ...buttonProps } = rest as ComponentPropsWithoutRef<"button">;
-  return (
-    <button type={type} className={classes} {...buttonProps}>
-      {content}
-    </button>
-  );
+
+  // Outline buttons get the template's corner brackets.
+  if (variant === "outline") {
+    return (
+      <Frame as="span" className={cn("inline-flex", className?.includes("w-full") && "w-full")}>
+        {el}
+      </Frame>
+    );
+  }
+  return el;
 }
 
 /** Renders a content-driven CTA. */

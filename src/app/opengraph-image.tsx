@@ -17,7 +17,8 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          background: "#060606",
+          background: "#0b0b0b",
+          backgroundImage: "repeating-linear-gradient(135deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 10px)",
           position: "relative",
           fontFamily: "sans-serif",
         }}
@@ -30,17 +31,17 @@ export default function OpenGraphImage() {
             width: 760,
             height: 560,
             borderRadius: 9999,
-            background: "radial-gradient(circle at 40% 40%, rgba(255,106,0,0.55), rgba(122,15,15,0.35) 55%, rgba(6,6,6,0) 75%)",
+            background: "radial-gradient(circle at 40% 40%, rgba(255,255,255,0.10), rgba(11,11,11,0) 70%)",
             filter: "blur(40px)",
           }}
         />
-        <div style={{ position: "absolute", top: 36, left: 56, color: "#ff8a3d", fontSize: 18, letterSpacing: 4 }}>[ BROKERAGE TECHNOLOGY PARTNER ]</div>
-        <div style={{ position: "absolute", top: 36, right: 56, color: "#ff8a3d", fontSize: 18, letterSpacing: 4 }}>[ SETUPZERO ]</div>
+        <div style={{ position: "absolute", top: 36, left: 56, color: "#8d8d8d", fontSize: 18, letterSpacing: 4 }}>BROKERAGE TECHNOLOGY PARTNER</div>
+        <div style={{ position: "absolute", top: 36, right: 56, color: "#8d8d8d", fontSize: 18, letterSpacing: 4 }}>SETUPZERO</div>
         <svg viewBox={LOGO_VIEWBOX} width={720} height={136} style={{ position: "relative" }}>
-          <path fill="#f3efe9" fillRule="evenodd" d={LOGO_PATH} />
+          <path fill="#eeeeee" fillRule="evenodd" d={LOGO_PATH} />
         </svg>
-        <div style={{ marginTop: 36, color: "#a39e98", fontSize: 30, letterSpacing: 1 }}>{site.tagline}</div>
-        <div style={{ position: "absolute", bottom: 40, display: "flex", gap: 28, color: "#6f6a66", fontSize: 18, letterSpacing: 2 }}>
+        <div style={{ marginTop: 36, color: "#c9c9c9", fontSize: 30, letterSpacing: 1 }}>{site.tagline}</div>
+        <div style={{ position: "absolute", bottom: 40, display: "flex", gap: 28, color: "#5d5d5d", fontSize: 18, letterSpacing: 2 }}>
           <span>CFD WHITE LABEL</span>
           <span>·</span>
           <span>PROP FIRM TECH</span>

@@ -28,8 +28,8 @@ export function SolutionTemplate({ page }: { page: SolutionPage }) {
         <section className="relative py-6">
           <div className="container-x">
             <Reveal>
-              <div className="flex items-start gap-4 rounded-card border-l-2 border-orange-500 glass px-6 py-5">
-                <Info className="mt-0.5 size-5 shrink-0 text-orange-400" />
+              <div className="flex items-start gap-4 border border-line border-l-2 border-l-ink bg-band px-6 py-5">
+                <Info className="mt-0.5 size-5 shrink-0 text-soft" />
                 <p className="text-sm leading-relaxed text-muted">{page.note}</p>
               </div>
             </Reveal>

@@ -14,8 +14,7 @@ export function ArticleLayout({ meta, children }: { meta: ArticleMeta; children:
   const date = new Date(meta.date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
   return (
     <>
-      <section className="relative overflow-hidden pt-36 pb-10 md:pt-44">
-        <div className="pointer-events-none absolute -top-40 right-[-10%] h-[480px] w-[680px] ember-glow opacity-60" aria-hidden />
+      <section className="relative overflow-hidden pt-12 pb-10 md:pt-16">
         <div className="container-x relative max-w-3xl">
           <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink">
             <ArrowLeft className="size-4" /> All articles
@@ -28,7 +27,7 @@ export function ArticleLayout({ meta, children }: { meta: ArticleMeta; children:
           </div>
           <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.04] text-ink md:text-5xl lg:text-6xl">{meta.title}</h1>
           <p className="mt-6 text-lg leading-relaxed text-muted md:text-xl">{meta.excerpt}</p>
-          <div className="mt-8 rounded-card border border-orange-500/30 bg-orange-500/10 px-5 py-4 text-sm text-orange-200">
+          <div className="mt-8 border border-line bg-band px-5 py-4 font-mono text-[11.5px] text-muted">
             Draft outline. This article is a stub with intro and section headings, ready to be expanded.
           </div>
         </div>
@@ -44,12 +43,12 @@ export function ArticleLayout({ meta, children }: { meta: ArticleMeta; children:
           <span className="bracket">Keep reading</span>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {related.map((a) => (
-              <Link key={a.slug} href={`/blog/${a.slug}`} className="group overflow-hidden rounded-card border border-line bg-surface transition-colors hover:border-orange-500/40">
+              <Link key={a.slug} href={`/blog/${a.slug}`} className="group overflow-hidden border border-line bg-card transition-colors hover:border-line-strong">
                 <Picture image={blogImage(a.slug)} className="aspect-[16/9]" rounded="rounded-none" sizes="33vw" />
                 <div className="p-5">
                 <span className="bracket-muted text-[10px]">{a.category}</span>
                 <h3 className="mt-3 font-display text-lg font-semibold leading-snug text-ink">{a.title}</h3>
-                <span className="mt-4 inline-flex items-center gap-1 text-xs text-orange-400">
+                <span className="mt-4 inline-flex items-center gap-1 text-xs text-soft">
                   Read <ArrowUpRight className="size-3.5" />
                 </span>
                 </div>

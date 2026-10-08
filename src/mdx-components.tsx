@@ -19,11 +19,11 @@ const components: MDXComponents = {
     <ul className="mb-6 space-y-2 pl-1 text-muted" {...props} />
   ),
   ol: (props: ComponentPropsWithoutRef<"ol">) => (
-    <ol className="mb-6 list-decimal space-y-2 pl-6 text-muted marker:text-orange-500" {...props} />
+    <ol className="mb-6 list-decimal space-y-2 pl-6 text-muted marker:text-soft" {...props} />
   ),
   li: (props: ComponentPropsWithoutRef<"li">) => (
     <li
-      className="relative pl-5 before:absolute before:top-[0.7em] before:left-0 before:size-1.5 before:rounded-full before:bg-orange-500"
+      className="relative pl-5 before:absolute before:top-[0.7em] before:left-0 before:size-1.5 before:bg-soft"
       {...props}
     />
   ),
@@ -31,10 +31,10 @@ const components: MDXComponents = {
     <strong className="font-semibold text-ink" {...props} />
   ),
   a: ({ href = "#", ...props }: ComponentPropsWithoutRef<"a">) => (
-    <Link href={href} className="text-orange-400 underline-orange hover:text-orange-300" {...props} />
+    <Link href={href} className="text-soft underline-orange hover:text-ink" {...props} />
   ),
   blockquote: (props: ComponentPropsWithoutRef<"blockquote">) => (
-    <blockquote className="my-8 rounded-card border-l-2 border-orange-500 glass px-6 py-5 text-ink" {...props} />
+    <blockquote className="my-8 border border-line border-l-2 border-l-ink bg-card px-6 py-5 font-serif text-xl text-ink" {...props} />
   ),
   hr: () => <hr className="my-10 border-line" />,
 };

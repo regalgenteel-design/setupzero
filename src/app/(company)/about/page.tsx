@@ -74,7 +74,7 @@ export default function AboutPage() {
               {a.team.map((m, i) => (
                 <Reveal key={m.role} delay={i * 0.06}>
                   <GlassCard className="flex h-full flex-col justify-end gap-1">
-                    <span className="font-mono text-xs text-orange-400">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="font-mono text-xs text-soft">{String(i + 1).padStart(2, "0")}</span>
                     <p className="mt-6 font-display text-lg font-semibold text-ink">{m.name}</p>
                     <p className="text-sm text-muted">{m.role}</p>
                   </GlassCard>

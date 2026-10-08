@@ -46,7 +46,7 @@ export function Typewriter({ phrases, className, typingMs = 75, deletingMs = 36,
     <span className={cn("inline-flex items-baseline", className)}>
       <span>{text}</span>
       {!reduce ? (
-        <span className="ml-1 inline-block w-[0.06em] self-stretch bg-orange-500 animate-caret" aria-hidden />
+        <span className="ml-1 inline-block w-[0.06em] self-stretch bg-ink animate-caret" aria-hidden />
       ) : null}
     </span>
   );

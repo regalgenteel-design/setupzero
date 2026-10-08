@@ -9,7 +9,7 @@ export function LegalTemplate({ doc }: { doc: LegalDoc }) {
       <section className="relative pb-24">
         <div className="container-x max-w-3xl">
           <p className="font-mono text-xs tracking-wide text-dim uppercase">Last updated {doc.updated}</p>
-          <div className="mt-6 flex items-start gap-3 rounded-card border border-orange-500/30 bg-orange-500/10 p-5 text-sm text-orange-200">
+          <div className="mt-6 flex items-start gap-3 border border-line bg-band p-5 text-sm text-soft">
             <AlertTriangle className="mt-0.5 size-4 shrink-0" />
             <p>{doc.intro}</p>
           </div>

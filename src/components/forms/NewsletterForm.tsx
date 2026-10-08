@@ -25,14 +25,14 @@ export function NewsletterForm() {
 
   if (status === "success") {
     return (
-      <p className="inline-flex items-center gap-2 text-sm text-orange-300" role="status">
+      <p className="inline-flex items-center gap-2 text-sm text-ink" role="status">
         <Check className="size-4" /> You are subscribed. Watch your inbox.
       </p>
     );
   }
 
   return (
-    <form onSubmit={onSubmit} className="flex w-full max-w-lg items-center gap-2 rounded-full border border-line bg-white/[0.03] p-1.5 pl-5 focus-within:border-orange-500/60">
+    <form onSubmit={onSubmit} className="flex w-full max-w-lg items-stretch border border-line bg-raise focus-within:border-ink/60">
       <input type="text" name="_hp" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
       <label htmlFor="newsletter-email" className="sr-only">
         Email address
@@ -42,16 +42,16 @@ export function NewsletterForm() {
         name="email"
         type="email"
         required
-        placeholder="Your email"
-        className="min-w-0 flex-1 bg-transparent text-sm text-ink placeholder:text-dim focus:outline-none"
+        placeholder="you@company.com"
+        className="min-w-0 flex-1 bg-transparent px-3.5 py-2.5 text-sm text-ink placeholder:text-faint focus:outline-none"
       />
       <button
         type="submit"
         disabled={status === "submitting"}
         aria-label="Subscribe"
-        className="flex size-9 shrink-0 items-center justify-center rounded-full bg-orange-500 text-black transition-colors hover:bg-orange-400"
+        className="flex items-center gap-2 bg-ink px-4 text-[13px] font-medium text-paper transition-colors hover:bg-soft"
       >
-        {status === "submitting" ? <Loader2 className="size-4 animate-spin" /> : <ArrowRight className="size-4" />}
+        {status === "submitting" ? <Loader2 className="size-4 animate-spin" /> : <>Subscribe <ArrowRight className="size-3.5" /></>}
       </button>
       {status === "error" ? <span className="sr-only">Subscription failed</span> : null}
     </form>

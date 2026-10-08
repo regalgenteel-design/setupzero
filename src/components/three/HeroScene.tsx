@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { useWebGL } from "@/lib/webgl";
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
 import { useReducedMotion } from "@/lib/hooks/useReducedMotion";
+import { useTheme } from "@/lib/hooks/useTheme";
 import { HeroFallback } from "./HeroFallback";
 
 const HeroCanvas = dynamic(() => import("./HeroCanvas"), {
@@ -21,6 +22,7 @@ export function HeroScene() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const reduce = useReducedMotion();
   const webgl = useWebGL();
+  const theme = useTheme();
   const [inView, setInView] = useState(true);
   const [tabVisible, setTabVisible] = useState(true);
 
@@ -41,7 +43,7 @@ export function HeroScene() {
 
   return (
     <div ref={ref} className="relative size-full">
-      {enabled ? <HeroCanvas active={inView && tabVisible} /> : <HeroFallback />}
+      {enabled ? <HeroCanvas active={inView && tabVisible} theme={theme} /> : <HeroFallback />}
     </div>
   );
 }

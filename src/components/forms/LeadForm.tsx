@@ -55,8 +55,8 @@ export function LeadForm({ type, fields, submitLabel, successTitle, successBody,
 
   if (status === "success") {
     return (
-      <div className={cn("flex flex-col items-start gap-3 rounded-card border border-orange-500/30 bg-orange-500/10 p-6", className)} role="status">
-        <CheckCircle2 className="size-7 text-orange-400" />
+      <div className={cn("flex flex-col items-start gap-3 border border-line bg-card p-6", className)} role="status">
+        <CheckCircle2 className="size-7 text-soft" />
         <h3 className="font-display text-xl font-semibold text-ink">{successTitle}</h3>
         <p className="text-sm leading-relaxed text-muted">{successBody}</p>
       </div>
@@ -79,7 +79,7 @@ export function LeadForm({ type, fields, submitLabel, successTitle, successBody,
           <div key={f.name} className={wrapper}>
             <Label htmlFor={id}>
               {f.label}
-              {f.required ? <span className="text-orange-400"> *</span> : null}
+              {f.required ? <span className="text-soft"> *</span> : null}
             </Label>
             {f.type === "textarea" ? (
               <Textarea id={id} name={f.name} placeholder={f.placeholder} required={f.required} />
@@ -111,7 +111,7 @@ export function LeadForm({ type, fields, submitLabel, successTitle, successBody,
           )}
         </Button>
         {status === "error" ? (
-          <p className="text-sm text-orange-300" role="alert">
+          <p className="text-sm text-soft" role="alert">
             {error}. Please try again.
           </p>
         ) : null}

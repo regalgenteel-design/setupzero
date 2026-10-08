@@ -1,5 +1,4 @@
 import { Check } from "lucide-react";
-import { cn } from "@/lib/cn";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -14,21 +13,22 @@ type BulletListProps = {
 
 export function BulletList({ eyebrow, heading, highlight, sub, bullets, className }: BulletListProps) {
   return (
-    <section className={cn("relative py-16 md:py-24", className)}>
-      <div className="container-x grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-        <Reveal>
-          <SectionHeading eyebrow={eyebrow} heading={heading ?? "Key features"} highlight={highlight} sub={sub} />
-        </Reveal>
-        <ul className="grid gap-3 sm:grid-cols-2">
+    <section className={className}>
+      <div className="grid gap-px bg-line lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="bg-paper px-6 py-12 md:px-10 md:py-16">
+          <Reveal>
+            <SectionHeading eyebrow={eyebrow} heading={heading ?? "Key features"} highlight={highlight} sub={sub} />
+          </Reveal>
+        </div>
+        <ul className="grid content-start gap-px bg-line">
           {bullets.map((b, i) => (
-            <Reveal key={b} delay={Math.min(i * 0.05, 0.4)}>
-              <li className="flex h-full items-start gap-3 rounded-card glass px-5 py-4 text-sm leading-relaxed text-ink">
-                <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-orange-500/15 text-orange-400">
-                  <Check className="size-3" />
-                </span>
-                {b}
-              </li>
-            </Reveal>
+            <li key={b} className="flex items-start gap-4 bg-paper px-6 py-5 text-[15px] leading-relaxed text-ink md:px-8">
+              <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center border border-line bg-raise text-soft">
+                <Check className="size-3" />
+              </span>
+              <span className="flex-1">{b}</span>
+              <span className="font-mono text-[10.5px] text-faint">{String(i + 1).padStart(2, "0")}</span>
+            </li>
           ))}
         </ul>
       </div>

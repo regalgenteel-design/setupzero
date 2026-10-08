@@ -13,38 +13,19 @@ type SectionHeadingProps = {
   as?: "h1" | "h2";
 };
 
-export function SectionHeading({
-  eyebrow,
-  heading,
-  highlight,
-  sub,
-  align = "left",
-  size = "md",
-  className,
-  as: Tag = "h2",
-}: SectionHeadingProps) {
+export function SectionHeading({ eyebrow, heading, highlight, sub, align = "left", size = "md", className, as: Tag = "h2" }: SectionHeadingProps) {
   return (
-    <div
-      className={cn(
-        "flex flex-col gap-4",
-        align === "center" && "items-center text-center",
-        className,
-      )}
-    >
+    <div className={cn("flex flex-col items-start gap-5", align === "center" && "items-center text-center", className)}>
       {eyebrow ? <Badge variant="bracket">{eyebrow}</Badge> : null}
       <Tag
         className={cn(
-          "font-display font-semibold text-ink",
-          size === "lg"
-            ? "text-4xl leading-[1.02] sm:text-5xl md:text-6xl"
-            : "text-3xl leading-[1.05] sm:text-4xl md:text-[44px]",
+          "font-display font-medium text-ink",
+          size === "lg" ? "text-[40px] leading-[1.02] md:text-[58px]" : "text-[32px] leading-[1.05] md:text-[44px]",
         )}
       >
         <Highlighted text={heading} highlight={highlight} />
       </Tag>
-      {sub ? (
-        <p className={cn("max-w-2xl text-base leading-relaxed text-muted md:text-lg")}>{sub}</p>
-      ) : null}
+      {sub ? <p className="max-w-xl text-[15px] leading-relaxed text-muted md:text-base">{sub}</p> : null}
     </div>
   );
 }

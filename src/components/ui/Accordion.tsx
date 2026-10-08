@@ -24,16 +24,16 @@ export function Accordion({ items, className }: { items: AccordionItem[]; classN
               aria-expanded={isOpen}
               aria-controls={panelId}
               onClick={() => setOpen(isOpen ? null : i)}
-              className="flex w-full items-center justify-between gap-6 py-5 text-left transition-colors hover:text-orange-300"
+              className="flex w-full items-center justify-between gap-6 px-1 py-5 text-left transition-colors hover:text-ink"
             >
               <span className="flex items-center gap-4">
-                <span className="font-mono text-xs text-orange-400">{String(i + 1).padStart(2, "0")}</span>
-                <span className="font-display text-lg font-medium text-ink md:text-xl">{item.q}</span>
+                <span className="font-mono text-[11px] text-muted">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-display text-base font-semibold text-ink md:text-lg">{item.q}</span>
               </span>
               <span
                 className={cn(
-                  "flex size-9 shrink-0 items-center justify-center rounded-full border border-line transition-all duration-300",
-                  isOpen && "rotate-45 border-orange-500 bg-orange-500 text-black",
+                  "flex size-8 shrink-0 items-center justify-center border border-line bg-raise text-muted transition-all duration-300",
+                  isOpen && "rotate-45 border-ink bg-ink text-paper",
                 )}
               >
                 <Plus className="size-4" />

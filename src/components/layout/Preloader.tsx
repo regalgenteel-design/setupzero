@@ -8,11 +8,7 @@ import { site } from "@/content/site";
 
 type Phase = "show" | "fade" | "gone";
 
-/**
- * Short brand splash on the first visit of a session.
- * Driven by timers and CSS transitions only, so it never depends on an animation
- * frame loop (which browsers pause in background tabs).
- */
+/** Short brand splash on the first visit of a session. Timers + CSS only. */
 export function Preloader() {
   const reduce = useReducedMotion();
   const [phase, setPhase] = useState<Phase>("show");
@@ -23,7 +19,7 @@ export function Preloader() {
       seen = sessionStorage.getItem("sz-preloader") === "1";
     } catch {}
     const skip = reduce || seen;
-    const fadeTimer = window.setTimeout(() => setPhase("fade"), skip ? 0 : 1100);
+    const fadeTimer = window.setTimeout(() => setPhase("fade"), skip ? 0 : 1000);
     const goneTimer = window.setTimeout(
       () => {
         setPhase("gone");
@@ -31,7 +27,7 @@ export function Preloader() {
           sessionStorage.setItem("sz-preloader", "1");
         } catch {}
       },
-      skip ? 50 : 1700,
+      skip ? 50 : 1600,
     );
     return () => {
       window.clearTimeout(fadeTimer);
@@ -44,16 +40,22 @@ export function Preloader() {
   return (
     <div
       className={cn(
-        "fixed inset-0 z-[200] flex flex-col items-center justify-center bg-bg transition-opacity duration-500 ease-in-out",
+        "fixed inset-0 z-[200] flex flex-col items-center justify-center bg-page transition-opacity duration-500 ease-in-out",
         phase === "fade" && "pointer-events-none opacity-0",
       )}
+      style={{ backgroundImage: "repeating-linear-gradient(135deg, var(--sz-hatch) 0 1px, transparent 1px 10px)" }}
       aria-hidden
     >
-      <div className="pointer-events-none absolute h-72 w-[36rem] ember-glow opacity-70" />
-      <div className="relative text-ink">
-        <Logo className="h-8 md:h-10" />
+      <div className="frame border border-line bg-paper px-10 py-8">
+        <span className="frame-c frame-tl" />
+        <span className="frame-c frame-tr" />
+        <span className="frame-c frame-bl" />
+        <span className="frame-c frame-br" />
+        <div className="text-ink">
+          <Logo className="h-7 md:h-8" />
+        </div>
+        <p className="mt-4 text-center font-mono text-[10.5px] tracking-[0.12em] text-muted uppercase">{site.tagline}</p>
       </div>
-      <p className="relative mt-5 font-mono text-[11px] tracking-[0.2em] text-muted uppercase">{site.tagline}</p>
     </div>
   );
 }
